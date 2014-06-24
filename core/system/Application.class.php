@@ -183,5 +183,13 @@ final class Application
         $sActionName = $this->aRoute['action'];
         $oController->$sActionName();
     }
+
+    public static function getServerCorePath()
+    {
+        $aPathElements = explode('/', __DIR__);
+        array_pop($aPathElements);
+        $sPath  = join('/', $aPathElements) ;
+        return $sPath;
+    }
 }
 

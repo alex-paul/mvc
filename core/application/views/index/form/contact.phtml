@@ -1,5 +1,21 @@
-<?php echo $sasasa;?><br/>
-<?php echo $das;?>
-<form>
-    <input type="text" value="email" />
-</form>
+<?php $form->openForm();?>
+<table>
+    <tr>
+        <td><?php echo $form->getInput('firstName')->getLabel();?></td>
+        <td><?php $form->getInput('firstName')->buildInput();?></td>
+    </tr>
+    <tr>
+        <td><?php echo $form->getInput('name')->getLabel();?></td>
+        <td><?php $form->getInput('name')->buildInput();?></td>
+    </tr>
+    <tr>
+        <td><?php echo $form->getInput('sex')->getLabel();?></td>
+        <td><?php $form->getInput('sex')->buildInput();?></td>
+    </tr>
+    <tr>
+        <td><?php $form->getInput('submit')->buildInput();?></td>
+        <td></td>
+    </tr>
+
+</table>
+<?php $form->closeForm(); ?>

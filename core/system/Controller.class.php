@@ -44,7 +44,7 @@ class Controller
         if (!is_array($aParameters))
         {
             throw new \Exception('The parameters provided should be put into an array.');
-        } elseif ( count ($aParameters) >= 1 ) {
+        } elseif (count ($aParameters) >= 1) {
             foreach ($aParameters as $key => $val)
             {
                 $$key = $val;
@@ -94,5 +94,46 @@ class Controller
             return $this->aParameters[$sParameterName];
         }
         return null;
+    }
+
+    /**
+     * Method that loads extensions based on the %sExtensionName. The extension must have the name
+     *
+     * @param $sExtensionName string
+     * @throws Exception
+     */
+    public function loadExtension($sExtensionName)
+    {
+
+        if(!isset($sExtensionName) && !is_string($sExtensionName)) {
+            throw new \Exception('Invalid extension name specified.');
+        }
+
+        $sBasePath = Application::getInstance()->getServerCorePath();
+
+        $sExtensionFileName = $sBasePath . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $sExtensionName . DIRECTORY_SEPARATOR . ucfirst($sExtensionName) . '.extension.php';
+
+        if(!file_exists($sExtensionFileName)) {
+            throw new \Exception('The specified extension not found in the library.');
+        }
+        require_once $sExtensionFileName;
+    }
+
+    /**
+     * Loads a model file and returns an instance of it.
+     *
+     * @param $sModelName
+     * @return mixed
+     * @throws Exception
+     */
+    public function loadModel($sModelName)
+    {
+        $sBasePath = Application::getInstance()->getServerCorePath();
+
+        $sModelFileName = $sBasePath . DIRECTORY_SEPARATOR . 'application/models' . DIRECTORY_SEPARATOR . $sModelName.'.php';
+        if(!file_exists($sModelFileName)) {
+            throw new \Exception('The specified model was not found. ['.$sModelName.']');
+        }
+        require_once $sModelFileName;
     }
 }
