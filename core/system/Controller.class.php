@@ -70,9 +70,9 @@ class Controller
             throw new \Exception('View name not specified!');
         }
 
-        $aViewsPath = explode('/', __DIR__);
+        $aViewsPath = explode(DIRECTORY_SEPARATOR, __DIR__);
         array_pop($aViewsPath);
-        $sViewsPath  = join('/', $aViewsPath) . '/application/views/';
+        $sViewsPath  = join(DIRECTORY_SEPARATOR, $aViewsPath) . DIRECTORY_SEPARATOR. 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
         $sViewFilePath = $sViewsPath . $sViewName . '.phtml';
         if (file_exists($sViewFilePath)) {
             $this->passParametersAndRequireView($sViewFilePath, $aParameters);

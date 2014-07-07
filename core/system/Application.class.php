@@ -97,11 +97,11 @@ final class Application
      */
     private function checkControllerFileExists()
     {
-        $aControllerPath = explode('/', __DIR__);
-        array_pop($aControllerPath);
-        $sControllerPath  = join('/', $aControllerPath) . '/application/controllers/';
+        $aControllerPath = explode(DIRECTORY_SEPARATOR, __DIR__);
+		array_pop($aControllerPath);
+        $sControllerPath  = join(DIRECTORY_SEPARATOR, $aControllerPath) . DIRECTORY_SEPARATOR . 'application'.DIRECTORY_SEPARATOR.'controllers'. DIRECTORY_SEPARATOR;	
         $sControllerFilePath = $sControllerPath . $this->aRoute['controller'] . '.php';
-        $this->sControllerFilePath = $sControllerFilePath;
+        $this->sControllerFilePath = $sControllerFilePath;		
         return file_exists($sControllerFilePath);
     }
 
@@ -186,7 +186,7 @@ final class Application
 
     public static function getServerCorePath()
     {
-        $aPathElements = explode('/', __DIR__);
+        $aPathElements = explode(DIRECTORY_SEPARATOR, __DIR__);
         array_pop($aPathElements);
         $sPath  = join('/', $aPathElements) ;
         return $sPath;
